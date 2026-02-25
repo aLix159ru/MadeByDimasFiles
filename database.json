@@ -1,20 +1,21 @@
 [
   {
     "id": "EFTA0000001",
-    "name": "Dimas_Secret_Strategy.pdf",
+    "name": "[ВРЕМЕННО ЗАСЕКРЕЧЕННО]",
     "dataset": "DataSet 1",
-    "size": "1.2 MB",
+    "size": "1000000000000000000000000 TB",
     "date": "15.02.2023",
-    "type": "pdf",
-    "url": "files/Dimas_Secret_Strategy.pdf"
+    "type": "-",
+    "url": "files/SECRET.png"
   },
   {
     "id": "EFTA0000002",
-    "name": "How_to_break_steklopaket.mp4",
+    "name": "Buterbrode",
     "dataset": "DataSet 9",
     "size": "45.0 MB",
     "date": "20.10.2023",
     "type": "mp4",
     "url": "files/buterbrode.mp4"
   }
+
 ]
