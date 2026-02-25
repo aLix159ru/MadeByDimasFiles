@@ -1,0 +1,20 @@
+[
+  {
+    "id": "EFTA0000001",
+    "name": "Dimas_Secret_Strategy.pdf",
+    "dataset": "DataSet 1",
+    "size": "1.2 MB",
+    "date": "15.02.2023",
+    "type": "pdf",
+    "url": "files/Dimas_Secret_Strategy.pdf"
+  },
+  {
+    "id": "EFTA0000002",
+    "name": "How_to_break_steklopaket.mp4",
+    "dataset": "DataSet 9",
+    "size": "45.0 MB",
+    "date": "20.10.2023",
+    "type": "mp4",
+    "url": "files/buterbrode.mp4"
+  }
+]

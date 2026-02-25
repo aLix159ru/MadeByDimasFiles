@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SECURE ARCHIVE // THE DIMA LEAKS</title>
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        h1 {
+            color: #ff4444;
+            border-bottom: 2px solid #30363d;
+            padding-bottom: 10px;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .search-section {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            margin-top: 30px;
+        }
+        .search-section input[type="text"] {
+            flex-grow: 1;
+            padding: 12px;
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+            font-size: 16px;
+            font-family: inherit;
+        }
+        .search-section input[type="text"]:focus {
+            border-color: #58a6ff;
+            outline: none;
+        }
+        .search-btn {
+            background-color: #1f6feb;
+            color: white;
+            padding: 0 30px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: inherit;
+        }
+        .search-btn:hover { background-color: #388bfd; }
+        .results-info { margin-bottom: 20px; font-size: 14px; color: #8b949e; }
+        .result-item {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #21262d;
+        }
+        .result-title {
+            color: #58a6ff;
+            font-size: 18px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .result-title:hover { text-decoration: underline; }
+        .result-snippet {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #8b949e;
+            line-height: 1.5;
+        }
+        .highlight { background-color: rgba(210, 168, 255, 0.4); color: white; }
+        #meme-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        .meme-text {
+            color: #ff4444;
+            font-size: 40px;
+            font-weight: bold;
+            animation: glitch 0.2s infinite;
+        }
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-5px, 5px) }
+            40% { transform: translate(-5px, -5px) }
+            60% { transform: translate(5px, 5px) }
+            80% { transform: translate(5px, -5px) }
+            100% { transform: translate(0) }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>[ СОВЕКРЕТНО ] БАЗА ДАННЫХ СТЕКЛОПАКЕТА</h1>
+
+    <div class="search-section">
+        <input type="text" id="searchInput" placeholder="Введите имя, тег или название файла...">
+        <button class="search-btn" onclick="performSearch()">Search</button>
+    </div>
+
+    <div class="results-info" id="resultsInfo">Установка защищенного соединения...</div>
+
+    <div id="resultsContainer"></div>
+</div>
+
+<div id="meme-overlay" onclick="closeMeme()">
+    <div class="meme-text">КРИТИЧЕСКАЯ ОШИБКА!</div>
+    <div style="color: white; margin-top: 20px;">СТЕКЛОПАКЕТ УЖЕ ВЫЕХАЛ ЗА ТОБОЙ.<br>(Кликни, чтобы закрыть)</div>
+</div>
+
+<script>
+    let database = [];
+
+    // Загружаем базу данных при открытии сайта
+    async function loadDatabase() {
+        try {
+            // Браузер скачивает наш JSON файл
+            const response = await fetch('database.json');
+            if (!response.ok) throw new Error('База не найдена');
+            
+            database = await response.json();
+            document.getElementById('resultsInfo').innerText = `Соединение установлено. Индекс: ${database.length} файлов.`;
+            renderResults(database, "");
+        } catch (error) {
+            document.getElementById('resultsInfo').innerHTML = `<span style="color: #ff4444;">[ ОШИБКА ] Не удалось загрузить database.json. Проверьте файлы на сервере.</span>`;
+            console.error("System Failure:", error);
+        }
+    }
+
+    // Запускаем загрузку сразу при старте
+    window.onload = loadDatabase;
+
+    function performSearch() {
+        const query = document.getElementById('searchInput').value.toLowerCase().trim();
+        
+        // Шанс 15% на мем при поиске
+        if (Math.random() < 0.15) {
+            triggerMeme();
+            return;
+        }
+
+        if (query === "") {
+            renderResults(database, query);
+            return;
+        }
+
+        const filtered = database.filter(item => 
+            item.name.toLowerCase().includes(query) || 
+            item.id.toLowerCase().includes(query)
+        );
+
+        renderResults(filtered, query);
+    }
+
+    function renderResults(results, query) {
+        const container = document.getElementById('resultsContainer');
+        const info = document.getElementById('resultsInfo');
+        container.innerHTML = '';
+
+        info.innerText = `Showing 1 to ${results.length} of ${results.length} Results.`;
+
+        if (results.length === 0) {
+            container.innerHTML = '<p style="color: #ff7b72;">По вашему запросу ничего не найдено. Файл уничтожен.</p>';
+            return;
+        }
+
+        results.forEach(item => {
+            const div = document.createElement('div');
+            div.className = 'result-item';
+            
+            let displayName = item.name;
+            if (query) {
+                const regex = new RegExp(`(${query})`, 'gi');
+                displayName = displayName.replace(regex, '<span class="highlight">$1</span>');
+            }
+
+            // Теперь при клике файл реально открывается (в новой вкладке)
+            div.innerHTML = `
+                <a class="result-title" onclick="openFile('${item.url}')">${item.id} - ${item.dataset}</a>
+                <div class="result-snippet">
+                    Original Filename: <strong>${displayName}</strong><br>
+                    Date Indexed: ${item.date} +0000 | File Size: ${item.size} | Type: ${item.type.toUpperCase()}<br>
+                    <em>Access Level: Restricted. To view contents, authorization is required.</em>
+                </div>
+            `;
+            container.appendChild(div);
+        });
+    }
+
+    function openFile(fileUrl) {
+        // Шанс 20%, что вместо файла откроется мем
+        if (Math.random() < 0.20) {
+            triggerMeme();
+        } else {
+            // Если мема нет — открываем реальный файл из базы
+            window.open(fileUrl, '_blank');
+        }
+    }
+
+    function triggerMeme() {
+        document.getElementById('meme-overlay').style.display = 'flex';
+    }
+
+    function closeMeme() {
+        document.getElementById('meme-overlay').style.display = 'none';
+    }
+
+    document.getElementById('searchInput').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            performSearch();
+        }
+    });
+</script>
+</body>
+</html>
