@@ -1,23 +1,20 @@
 [
-  {
-    "id": "EFTA0000001",
-    "name": "[ВРЕМЕННО ЗАСЕКРЕЧЕННО]",
-    "dataset": "DataSet 1",
-    "size": "1000000000000000000000000 TB",
-    "date": "15.02.2023",
-    "type": "-",
-    "url": "files/SECRET.png"
-  },
-  {
-    "id": "EFTA0000002",
-    "name": "Buterbrode",
-    "dataset": "DataSet 9",
-    "size": "45.0 MB",
-    "date": "20.10.2023",
-    "type": "mp4",
-    "url": "files/buterbrode.mp4"
-  }
-
+    {
+        "id": "EFTA73508665",
+        "name": "buterbrode2.mp4",
+        "dataset": "DataSet 14",
+        "size": "135.2 KB",
+        "date": "26.02.2026",
+        "type": "mp4",
+        "url": "files/buterbrode2.mp4"
+    },
+    {
+        "id": "EFTA49311797",
+        "name": "cat.png",
+        "dataset": "DataSet 3",
+        "size": "43.9 KB",
+        "date": "26.02.2026",
+        "type": "png",
+        "url": "files/cat.png"
+    }
 ]
-
-
