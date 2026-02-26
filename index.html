@@ -137,7 +137,7 @@
             document.getElementById('resultsInfo').innerText = `Соединение установлено. Индекс: ${database.length} файлов.`;
             renderResults(database, "");
         } catch (error) {
-            document.getElementById('resultsInfo').innerHTML = `<span style="color: #ff4444;">[ ОШИБКА ] Не удалось загрузить database.json. Проверьте файлы на сервере. Напишите @aLix59ru в Телеграм</span>`;
+            document.getElementById('resultsInfo').innerHTML = `<span style="color: #ff4444;">[ ОШИБКА ] Не удалось загрузить дата-базу. Проверьте файлы на сервере. Напишите @aLix59ru в Телеграм</span>`;
             console.error("System Failure:", error);
         }
     }
@@ -229,3 +229,4 @@
 </body>
 
 </html>
+
